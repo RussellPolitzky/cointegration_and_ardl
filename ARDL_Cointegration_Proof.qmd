@@ -98,13 +98,19 @@ $$ {#eq-fvt}
 To find the long-run multiplier for the exogenous variable $X$, we analyze the system's response to a unit step input, $X_t = u(t)$, where $u(t) = 1$ for $t \ge 0$. The Z-transform of a unit step is $X(z) = \frac{1}{1-z^{-1}}$. The component of the output that is driven by $X$ is $Y_x(z) = H(z)X(z)$. Applying the FVT to this component gives the long-run effect:
 
 $$
-\text{Long-Run Multiplier} = \lim_{z \to 1} (1 - z^{-1}) Y_x(z) = \lim_{z \to 1} (1 - z^{-1}) H(z) X(z)
+\begin{align}
+\text{Long-Run Multiplier} &= \lim_{z \to 1} (1 - z^{-1}) Y_x(z) \\
+                           &= \lim_{z \to 1} (1 - z^{-1}) H(z) X(z)
+\end{align}
 $$
 
 Substituting $X(z) = \frac{1}{1-z^{-1}}$:
 
 $$
-\text{Long-Run Multiplier} = \lim_{z \to 1} (1 - z^{-1}) H(z) \frac{1}{1-z^{-1}} = \lim_{z \to 1} H(z)
+\begin{align}
+\text{Long-Run Multiplier} &= \lim_{z \to 1} (1 - z^{-1}) H(z) \frac{1}{1-z^{-1}} \\
+                           &= \lim_{z \to 1} H(z)
+\end{align}                           
 $$
 
 Evaluating the limit by substituting the expression for $H(z)$ from @eq-transfer-function and setting $z=1$:
@@ -118,7 +124,10 @@ This equation gives us the long-run multiplier for the exogenous variable $X$.
 The same logic applies to the intercept term. The long-run effect of the constant, $\alpha$, on the output $Y$ is found by applying the FVT to the intercept's component in the full system response (@eq-full-response):
 
 $$
-\text{Long-Run Intercept} = \lim_{z \to 1} (1 - z^{-1}) \left( \frac{\frac{\alpha}{1-z^{-1}}}{1 - \sum_{i=1}^{p} \phi_i z^{-i}} \right) = \frac{\alpha}{1 - \sum_{i=1}^{p} \phi_i}
+\begin{align}
+\text{Long-Run Intercept} &= \lim_{z \to 1} (1 - z^{-1}) \left( \frac{\frac{\alpha}{1-z^{-1}}}{1 - \sum_{i=1}^{p} \phi_i z^{-i}} \right) \\
+                          &= \frac{\alpha}{1 - \sum_{i=1}^{p} \phi_i}
+\end{align}
 $$ {#eq-long-run-intercept}
 
 The cointegration vector is formed by these long-run multipliers.

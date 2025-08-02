@@ -2406,11 +2406,17 @@ Figure 1: The Z-Plane, showing the unit circle. The point <span class="math inl
 \tag{5}\]</span></span></p>
 <p>To find the long-run multiplier for the exogenous variable <span class="math inline">\(X\)</span>, we analyze the system’s response to a unit step input, <span class="math inline">\(X_t = u(t)\)</span>, where <span class="math inline">\(u(t) = 1\)</span> for <span class="math inline">\(t \ge 0\)</span>. The Z-transform of a unit step is <span class="math inline">\(X(z) = \frac{1}{1-z^{-1}}\)</span>. The component of the output that is driven by <span class="math inline">\(X\)</span> is <span class="math inline">\(Y_x(z) = H(z)X(z)\)</span>. Applying the FVT to this component gives the long-run effect:</p>
 <p><span class="math display">\[
-\text{Long-Run Multiplier} = \lim_{z \to 1} (1 - z^{-1}) Y_x(z) = \lim_{z \to 1} (1 - z^{-1}) H(z) X(z)
+\begin{align}
+\text{Long-Run Multiplier} &amp;= \lim_{z \to 1} (1 - z^{-1}) Y_x(z) \\
+                           &amp;= \lim_{z \to 1} (1 - z^{-1}) H(z) X(z)
+\end{align}
 \]</span></p>
 <p>Substituting <span class="math inline">\(X(z) = \frac{1}{1-z^{-1}}\)</span>:</p>
 <p><span class="math display">\[
-\text{Long-Run Multiplier} = \lim_{z \to 1} (1 - z^{-1}) H(z) \frac{1}{1-z^{-1}} = \lim_{z \to 1} H(z)
+\begin{align}
+\text{Long-Run Multiplier} &amp;= \lim_{z \to 1} (1 - z^{-1}) H(z) \frac{1}{1-z^{-1}} \\
+                           &amp;= \lim_{z \to 1} H(z)
+\end{align}                           
 \]</span></p>
 <p>Evaluating the limit by substituting the expression for <span class="math inline">\(H(z)\)</span> from <a href="#eq-transfer-function" class="quarto-xref">Equation 3</a> and setting <span class="math inline">\(z=1\)</span>:</p>
 <p><span id="eq-long-run-multiplier"><span class="math display">\[
@@ -2419,7 +2425,10 @@ Figure 1: The Z-Plane, showing the unit circle. The point <span class="math inl
 <p>This equation gives us the long-run multiplier for the exogenous variable <span class="math inline">\(X\)</span>.</p>
 <p>The same logic applies to the intercept term. The long-run effect of the constant, <span class="math inline">\(\alpha\)</span>, on the output <span class="math inline">\(Y\)</span> is found by applying the FVT to the intercept’s component in the full system response (<a href="#eq-full-response" class="quarto-xref">Equation 4</a>):</p>
 <p><span id="eq-long-run-intercept"><span class="math display">\[
-\text{Long-Run Intercept} = \lim_{z \to 1} (1 - z^{-1}) \left( \frac{\frac{\alpha}{1-z^{-1}}}{1 - \sum_{i=1}^{p} \phi_i z^{-i}} \right) = \frac{\alpha}{1 - \sum_{i=1}^{p} \phi_i}
+\begin{align}
+\text{Long-Run Intercept} &amp;= \lim_{z \to 1} (1 - z^{-1}) \left( \frac{\frac{\alpha}{1-z^{-1}}}{1 - \sum_{i=1}^{p} \phi_i z^{-i}} \right) \\
+                          &amp;= \frac{\alpha}{1 - \sum_{i=1}^{p} \phi_i}
+\end{align}
 \tag{7}\]</span></span></p>
 <p>The cointegration vector is formed by these long-run multipliers.</p>
 </section>
