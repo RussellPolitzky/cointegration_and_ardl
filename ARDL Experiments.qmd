@@ -1,0 +1,109 @@
+---
+title: "ARDL Experiments"
+format: html
+theme: darkly
+---
+
+# ARDL Model Example
+
+We will build an ARDL model as follows:
+
+```{
+r}
+#| label: setup
+
+suppressPackageStartupMessages({
+  library(ARDL)
+})
+
+data(denmark)
+
+ardl_3132 <- ardl(LRM ~ LRY + IBO + IDE, data = denmark, order = c(3,1,3,2))
+ardl_3132
+```
+
+This command fits an ARDL(3,1,3,2) model, which is described by @eq-ardl_model.
+
+$$
+\begin{align}
+LRM =& +2.62 \\
+     & +0.32 \cdot LRM_{t-1} + 0.53 \cdot LRM_{t-2} -0.27 \cdot LRM_{t-3} \\
+     & +0.67 \cdot LRY -0.26 \cdot LRY_{t-1} \\
+     & -1.08 \cdot IBO -0.11 \cdot IBO_{t-1} + 0.29 \cdot IBO_{t-2} \\
+     & +0.13 \cdot IDE -0.33 \cdot IDE_{t-1} + 1.40 \cdot IDE_{t-2}
+\end{align}
+$$ {#eq-ardl_model}
+
+To test for cointegration, we use the bounds F-test on the ARDL model as follows:
+
+```{
+r}
+#| label: bounds-test
+ 
+bounds_test_results <-
+    bounds_f_test(
+        ardl_3132   ,
+        case =     2, # Case 2: Restricted intercept and no trend.
+        alpha = 0.01  # Confidence interval at which we test H_0
+    )
+
+bounds_test_results
+```
+
+For the null hypothesis of no cointegration to be accepted, the F-statistic must lie between the lower bound $I(0) = 2.7750$ and the upper bound $I(1) = 3.6595$. Since the calculated F-statistic is 5.1168, which falls outside these bounds, we reject the null hypothesis at the 1% significance level. Therefore, a possible cointegrating relationship exists between the endogenous variable LRM and the exogenous variables LRY, IBO, and IDE.
+
+Given this result, the cointegration vector is as follows:
+
+```{
+r}
+#| label: coint-vector
+multipliers(ardl_3132)
+```
+
+The resulting cointegration vector, including the intercept, is shown in @eq-coint_vector:
+
+$$
+\begin{align}
+LRM &=       6.29 + 0.996 \cdot LRY - 4.54 \cdot IBO + 2.89 \cdot IDE \\
+  0 &= LRM - 6.29 - 0.996 \cdot LRY + 4.54 \cdot IBO - 2.89 \cdot IDE
+\end{align}
+$$ {#eq-coint_vector}
+
+Given the ARDL model, can we find the cointegration vector using a simple Z-transform technique?
+
+# Cointegration Vector from the ARDL Equation using Z-Domain Techniques
+
+## The Z-Plane
+
+![The Z-Plane, showing the unit circle and the point Z=1, which corresponds to the steady-state or DC component of a signal.](z_plane.svg)
+
+Applying the $\mathcal{Z}$-transform to @eq-ardl_model, we obtain @eq-z_transformed. To find the long-run (steady-state) relationship, we must evaluate the system's response at zero frequency, which corresponds to setting $Z=1$.
+
+$$
+\begin{align}
+LRM\left(Z\right)=&+2.62\\&+0.32\cdot LRM\left(Z\right)\cdot Z^{-1}+0.53\cdot LRM\left(Z\right)\cdot Z^{-2}-0.27\cdot LRM\left(Z\right)\cdot Z^{-3}\\&+0.67\cdot LRY\left(Z\right)-0.26\cdot LRY\left(Z\right)\cdot Z^{-1}\\&-1.08\cdot IBO\left(Z\right)-0.11\cdot IBO\left(Z\right)\cdot Z^{-1}+0.29\cdot IBO\left(Z\right)\cdot Z^{-2}\\&+0.13\cdot IDE\left(Z\right)-0.33\cdot IDE\left(Z\right)\cdot Z^{-1}+1.40\cdot IDE\left(Z\right)\cdot Z^{-2}
+\end{align}
+$$ {#eq-z_transformed}
+
+Setting $Z=1$ in @eq-z_transformed allows us to solve for the long-run multipliers because $Z=1$ represents the DC or steady-state component of the signal. The formula for the long-run multipliers is given in @eq-longrun-multiplier:
+
+$$
+LRM(1) = \frac{\text{Intercept} + \sum\gamma_j + \sum\delta_k + \sum\zeta_l}{1 - \sum\beta_i}
+$$ {#eq-longrun-multiplier}
+
+where $\beta_i$ are the coefficients of the lagged $LRM$, and $\gamma_j, \delta_k, \zeta_l$ are the coefficients of the exogenous variables and their lags.
+
+When we sum the full-precision coefficients from the `ardl_3132` model object and solve, we get the long-run equation shown in @eq-zdomain-coint:
+
+$$
+LRM = 6.29 + 0.996 \cdot LRY - 4.54 \cdot IBO + 2.89 \cdot IDE
+$$ {#eq-zdomain-coint}
+
+As shown, this result from the Z-transform method is identical to the cointegration vector produced by the `multipliers()` function in @eq-coint_vector. This confirms that setting $Z=1$ is the correct approach for deriving the long-run equilibrium relationship from the ARDL model's difference equation.
+
+# The Cointegration Vector From The Time Domain
+
+The same result can be obtained by realising that the cointegration 
+vector is the long term relationship which remains when all short term
+transients have died down.  If this is the case, then to find the 
+long term reltionship, ignore the lags since the lagged variable values must be equal to the corresponding, contemporaneous values.  Simplifying the resulting equation produces the cointegration vector.

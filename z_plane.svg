@@ -1,0 +1,49 @@
+<svg width="400" height="400" viewBox="-2 -2 4 4" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .axis {
+      stroke: #888;
+      stroke-width: 0.02;
+      stroke-linecap: round;
+    }
+    .axis-arrow {
+      fill: #888;
+    }
+    .unit-circle {
+      stroke: #66d9ef;
+      stroke-width: 0.04;
+      fill: none;
+    }
+    .point {
+      fill: #fd971f;
+    }
+    .label {
+      font-family: sans-serif;
+      font-size: 0.2px;
+      fill: #ccc;
+      text-anchor: middle;
+    }
+    .point-label {
+      font-size: 0.18px;
+      fill: #fd971f;
+      text-anchor: start;
+    }
+  </style>
+
+  <!-- Axes -->
+  <line class="axis" x1="-1.8" y1="0" x2="1.8" y2="0" />
+  <line class="axis" x1="0" y1="-1.8" x2="0" y2="1.8" />
+  <polygon class="axis-arrow" points="1.8,0 1.7,-0.05 1.7,0.05" />
+  <polygon class="axis-arrow" points="0,1.8 -0.05,1.7 0.05,1.7" />
+
+  <!-- Axis Labels -->
+  <text class="label" x="1.6" y="0.2">Re(z)</text>
+  <text class="label" x="-0.3" y="1.7">Im(z)</text>
+
+  <!-- Unit Circle -->
+  <circle class="unit-circle" cx="0" cy="0" r="1" />
+
+  <!-- Point at z=1 -->
+  <circle class="point" cx="1" cy="0" r="0.05" />
+  <text class="point-label" x="1.1" y="-0.1">z=1</text>
+
+</svg>

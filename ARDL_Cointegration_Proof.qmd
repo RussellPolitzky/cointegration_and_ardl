@@ -1,0 +1,183 @@
+---
+title: "Long-Run Equilibrium in ARDL Models"
+subtitle: "A Formal Proof using the Z-Transform and the Final Value Theorem"
+author:
+  - name: Russell Politzky
+  - name: Gemini
+format: html
+theme: darkly
+bibliography: references.bib
+csl: ieee.csl
+embed-resources: true
+---
+
+# Introduction
+
+This document provides a formal proof for deriving the long-run multipliers from an Autoregressive Distributed Lag (ARDL) model. These multipliers form the cointegration vector, which represents the long-run equilibrium relationship between the variables. The proof will use Z-transform techniques, specifically the Final Value Theorem.
+
+A general ARDL(p, q) model can be expressed as a difference equation:
+
+$$
+Y_t = \alpha + \sum_{i=1}^{p} \phi_i Y_{t-i} + \sum_{j=0}^{q} \beta_j X_{t-j} + \epsilon_t
+$$ {#eq-ardl-general}
+
+$$
+\begin{array}{ll}
+\hline
+\textbf{Term} & \textbf{Description} \\
+\hline
+Y_t & \text{The endogenous variable at time } t. \\
+X_t & \text{The exogenous variable at time } t. \\
+\alpha & \text{The intercept or constant term.} \\
+\phi_i & \text{The coefficients of the lagged endogenous variable.} \\
+\beta_j & \text{The coefficients of the exogenous variable and its lags.} \\
+p & \text{The number of lags for the endogenous variable.} \\
+q & \text{The number of lags for the exogenous variable.} \\
+\epsilon_t & \text{The error term at time } t. \\
+\hline
+\end{array}
+$$
+
+# Z-Transform of the ARDL Equation
+
+To analyze the long-run behavior of the system, we first apply the Z-transform to the ARDL equation (@eq-ardl-general). The Z-transform converts the difference equation into an algebraic equation in the Z-domain. For this analysis, the constant intercept, $\alpha$, is treated as a causal step function input, $\alpha \cdot u(t)$, which is constant for $t \ge 0$. Its Z-transform is $\frac{\alpha}{1-z^{-1}}$. Using this and the time-shifting property of the Z-transform, which states that $\mathcal{Z}\{f_{t-k}\} = z^{-k}F(z)$, we get:
+
+$$
+Y(z) = \frac{\alpha}{1-z^{-1}} + Y(z)\sum_{i=1}^{p} \phi_i z^{-i} + X(z)\sum_{j=0}^{q} \beta_j z^{-j} + E(z)
+$$ {#eq-z-transformed-general}
+
+$$
+\begin{array}{ll}
+\hline
+\textbf{Term} & \textbf{Description} \\
+\hline
+Y(z) & \text{The Z-transform of the endogenous variable } Y_t. \\
+X(z) & \text{The Z-transform of the exogenous variable } X_t. \\
+E(z) & \text{The Z-transform of the error term } \epsilon_t. \\
+z^{-k} & \text{Represents a time delay of } k \text{ periods.} \\
+\hline
+\end{array}
+$$
+
+Rearranging the equation to solve for $Y(z)$:
+
+$$
+Y(z) \left(1 - \sum_{i=1}^{p} \phi_i z^{-i}\right) = \frac{\alpha}{1-z^{-1}} + X(z)\sum_{j=0}^{q} \beta_j z^{-j} + E(z)
+$$
+
+To find the transfer function, $H(z)$, which describes the relationship between the exogenous input $X(z)$ and the output $Y(z)$, we set the other inputs (the intercept $\alpha$ and error $E(z)$) to zero:
+
+$$
+Y(z) \left(1 - \sum_{i=1}^{p} \phi_i z^{-i}\right) = X(z)\sum_{j=0}^{q} \beta_j z^{-j}
+$$
+
+The transfer function $H(z)$ is the ratio $\frac{Y(z)}{X(z)}$:
+
+$$
+H(z) = \frac{Y(z)}{X(z)} = \frac{\sum_{j=0}^{q} \beta_j z^{-j}}{1 - \sum_{i=1}^{p} \phi_i z^{-i}}
+$$ {#eq-transfer-function}
+
+The full system response can now be expressed more compactly by including the intercept and error terms:
+
+$$
+Y(z) = \frac{\frac{\alpha}{1-z^{-1}} + E(z)}{1 - \sum_{i=1}^{p} \phi_i z^{-i}} + H(z) X(z)
+$$ {#eq-full-response}
+
+# The Final Value Theorem and Long-Run Multipliers
+
+The Final Value Theorem (FVT) in Z-domain analysis allows us to find the steady-state value of a signal directly from its Z-transform. The theorem states that if the system is stable, the final value of the time-domain signal $y_t$ as $t \to \infty$ is found by evaluating the limit as $z \to 1$. This point on the Z-plane corresponds to the DC or steady-state component of the signal, as illustrated in @fig-zplane.
+
+![The Z-Plane, showing the unit circle. The point $z=1$ is highlighted, as this is the point evaluated when applying the Final Value Theorem to find the long-run steady-state gain.](z_plane.svg){#fig-zplane}
+
+The Final Value Theorem is formally stated in @eq-fvt. It allows us to find the steady-state value of a time-domain signal directly from its Z-transform.
+
+$$
+\lim_{t \to \infty} y_t = \lim_{z \to 1} (1 - z^{-1}) Y(z)
+$$ {#eq-fvt}
+
+To find the long-run multiplier for the exogenous variable $X$, we analyze the system's response to a unit step input, $X_t = u(t)$, where $u(t) = 1$ for $t \ge 0$. The Z-transform of a unit step is $X(z) = \frac{1}{1-z^{-1}}$. The component of the output that is driven by $X$ is $Y_x(z) = H(z)X(z)$. Applying the FVT to this component gives the long-run effect:
+
+$$
+\text{Long-Run Multiplier} = \lim_{z \to 1} (1 - z^{-1}) Y_x(z) = \lim_{z \to 1} (1 - z^{-1}) H(z) X(z)
+$$
+
+Substituting $X(z) = \frac{1}{1-z^{-1}}$:
+
+$$
+\text{Long-Run Multiplier} = \lim_{z \to 1} (1 - z^{-1}) H(z) \frac{1}{1-z^{-1}} = \lim_{z \to 1} H(z)
+$$
+
+Evaluating the limit by substituting the expression for $H(z)$ from @eq-transfer-function and setting $z=1$:
+
+$$
+\text{Long-Run Multiplier} = \frac{\sum_{j=0}^{q} \beta_j}{1 - \sum_{i=1}^{p} \phi_i}
+$$ {#eq-long-run-multiplier}
+
+This equation gives us the long-run multiplier for the exogenous variable $X$.
+
+The same logic applies to the intercept term. The long-run effect of the constant, $\alpha$, on the output $Y$ is found by applying the FVT to the intercept's component in the full system response (@eq-full-response):
+
+$$
+\text{Long-Run Intercept} = \lim_{z \to 1} (1 - z^{-1}) \left( \frac{\frac{\alpha}{1-z^{-1}}}{1 - \sum_{i=1}^{p} \phi_i z^{-i}} \right) = \frac{\alpha}{1 - \sum_{i=1}^{p} \phi_i}
+$$ {#eq-long-run-intercept}
+
+The cointegration vector is formed by these long-run multipliers.
+
+# Application to the Example ARDL Equation
+
+Let's apply this technique to the `ardl_3132` model from the `ARDL Experiments.qmd` file. The model equation is:
+
+$$
+\begin{align}
+LRM_t =& +2.62 \\
+     & +0.32 \cdot LRM_{t-1} + 0.53 \cdot LRM_{t-2} -0.27 \cdot LRM_{t-3} \\
+     & +0.67 \cdot LRY_t -0.26 \cdot LRY_{t-1} \\
+     & -1.08 \cdot IBO_t -0.11 \cdot IBO_{t-1} + 0.29 \cdot IBO_{t-2} -0.99 \cdot IBO_{t-3} \\
+     & +0.13 \cdot IDE_t -0.33 \cdot IDE_{t-1} + 1.40 \cdot IDE_{t-2}
+\end{align}
+$$ {#eq-ardl-example}
+
+Transforming to the Z-domain and setting $z=1$ (which is equivalent to summing the coefficients for each variable), we can find the long-run multipliers.
+
+**Denominator (from LRM lags):**
+
+$$
+1 - \sum \phi_i = 1 - (0.3192 + 0.5326 - 0.2687) = 1 - 0.5831 = 0.4169
+$$
+
+**Numerators (from exogenous variables):**
+
+$$
+\sum \beta_{LRY} = 0.6728 - 0.2574 = 0.4154
+$$
+$$
+\sum \beta_{IBO} = -1.0785 - 0.1062 + 0.2877 - 0.9947 = -1.8917
+$$
+$$
+\sum \beta_{IDE} = 0.1255 - 0.3280 + 1.4079 = 1.2054
+$$
+
+Now, we calculate the long-run multipliers using the formula from @eq-long-run-multiplier:
+
+$$
+\text{Intercept Multiplier} = \frac{2.62}{0.4169} = 6.28
+$$
+$$
+\text{LRY Multiplier} = \frac{0.4154}{0.4169} = 0.996
+$$
+$$
+\text{IBO Multiplier} = \frac{-1.8917}{0.4169} = -4.54
+$$
+$$
+\text{IDE Multiplier} = \frac{1.2054}{0.4169} = 2.89
+$$
+
+This gives us the cointegrating equation:
+
+$$
+LRM = 6.28 + 0.996 \cdot LRY - 4.54 \cdot IBO + 2.89 \cdot IDE
+$$ {#eq-final-coint-eq}
+
+This result is identical to the one obtained using the `multipliers()` function in the `ARDL` package [@ardl_pkg], confirming that the Z-transform and Final Value Theorem provide the correct theoretical foundation for recovering the cointegration vector.
+
+# References
