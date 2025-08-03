@@ -2304,7 +2304,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Long-Run Equilibrium in ARDL Models</h1>
-<p class="subtitle lead">A Formal Proof using the Z-Transform and the Final Value Theorem</p>
+<p class="subtitle lead">A Formal Proof using the <span class="math inline">\(\mathcal{Z}\)</span>-Transform and the Final Value Theorem</p>
 </div>
 
 
@@ -2330,8 +2330,8 @@ window.Quarto = {
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>This document provides a formal proof for deriving the long-run multipliers from an Autoregressive Distributed Lag (ARDL) model. These multipliers form the cointegration vector, which represents the long-run equilibrium relationship between the variables. The proof will use Z-transform techniques, specifically the Final Value Theorem.</p>
-<p>A general ARDL(p, q) model can be expressed as a difference equation:</p>
+<p>This document provides a formal proof for deriving the long-run multipliers from an Autoregressive Distributed Lag (ARDL) model. These multipliers form the cointegration vector, which represents the long-run equilibrium relationship between the variables. The proof will use <span class="math inline">\(\mathcal{Z}\)</span>-transform techniques, specifically the Final Value Theorem.</p>
+<p>A general <span class="math inline">\(ARDL(p, q)\)</span> model can be expressed as the difference equation shown in <a href="#eq-ardl-general" class="quarto-xref">Equation 1</a>.</p>
 <p><span id="eq-ardl-general"><span class="math display">\[
 Y_t = \alpha + \sum_{i=1}^{p} \phi_i Y_{t-i} + \sum_{j=0}^{q} \beta_j X_{t-j} + \epsilon_t
 \tag{1}\]</span></span></p>
@@ -2352,9 +2352,9 @@ q &amp; \text{The number of lags for the exogenous variable.} \\
 \end{array}
 \]</span></p>
 </section>
-<section id="z-transform-of-the-ardl-equation" class="level1">
-<h1>Z-Transform of the ARDL Equation</h1>
-<p>To analyze the long-run behavior of the system, we first apply the Z-transform to the ARDL equation (<a href="#eq-ardl-general" class="quarto-xref">Equation 1</a>). The Z-transform converts the difference equation into an algebraic equation in the Z-domain. For this analysis, the constant intercept, <span class="math inline">\(\alpha\)</span>, is treated as a causal step function input, <span class="math inline">\(\alpha \cdot u(t)\)</span>, which is constant for <span class="math inline">\(t \ge 0\)</span>. Its Z-transform is <span class="math inline">\(\frac{\alpha}{1-z^{-1}}\)</span>. Using this and the time-shifting property of the Z-transform, which states that <span class="math inline">\(\mathcal{Z}\{f_{t-k}\} = z^{-k}F(z)\)</span>, we get:</p>
+<section id="mathcalz-transform-of-the-ardl-equation" class="level1">
+<h1><span class="math inline">\(\mathcal{Z}\)</span>-Transform of the ARDL Equation</h1>
+<p>To analyze the long-run behavior of the system, we first apply the <span class="math inline">\(\mathcal{Z}\)</span>-transform to the ARDL equation (<a href="#eq-ardl-general" class="quarto-xref">Equation 1</a>). The <span class="math inline">\(\mathcal{Z}\)</span>-transform converts the difference equation into an algebraic equation in the <span class="math inline">\(\mathcal{Z}\)</span>-domain. For this analysis, the constant intercept, <span class="math inline">\(\alpha\)</span>, is treated as a causal step function input, <span class="math inline">\(\alpha \cdot u(t)\)</span>, which is constant for <span class="math inline">\(t \ge 0\)</span>. Its <span class="math inline">\(\mathcal{Z}\)</span>-transform is <span class="math inline">\(\frac{\alpha}{1-z^{-1}}\)</span>. Using this and the time-shifting property of the <span class="math inline">\(\mathcal{Z}\)</span>-transform, which states that <span class="math inline">\(\mathcal{Z}\{f_{t-k}\} = z^{-k}F(z)\)</span>, we get:</p>
 <p><span id="eq-z-transformed-general"><span class="math display">\[
 Y(z) = \frac{\alpha}{1-z^{-1}} + Y(z)\sum_{i=1}^{p} \phi_i z^{-i} + X(z)\sum_{j=0}^{q} \beta_j z^{-j} + E(z)
 \tag{2}\]</span></span></p>
@@ -2363,9 +2363,9 @@ Y(z) = \frac{\alpha}{1-z^{-1}} + Y(z)\sum_{i=1}^{p} \phi_i z^{-i} + X(z)\sum_{j=
 \hline
 \textbf{Term} &amp; \textbf{Description} \\
 \hline
-Y(z) &amp; \text{The Z-transform of the endogenous variable } Y_t. \\
-X(z) &amp; \text{The Z-transform of the exogenous variable } X_t. \\
-E(z) &amp; \text{The Z-transform of the error term } \epsilon_t. \\
+Y(z)   &amp; \text{The } \mathcal{Z}\text{-transform of the endogenous variable } Y_t. \\
+X(z)   &amp; \text{The } \mathcal{Z}\text{-transform of the exogenous variable } X_t. \\
+E(z)   &amp; \text{The } \mathcal{Z}\text{-transform of the error term } \epsilon_t. \\
 z^{-k} &amp; \text{Represents a time delay of } k \text{ periods.} \\
 \hline
 \end{array}
@@ -2389,22 +2389,22 @@ Y(z) = \frac{\frac{\alpha}{1-z^{-1}} + E(z)}{1 - \sum_{i=1}^{p} \phi_i z^{-i}} +
 </section>
 <section id="the-final-value-theorem-and-long-run-multipliers" class="level1">
 <h1>The Final Value Theorem and Long-Run Multipliers</h1>
-<p>The Final Value Theorem (FVT) in Z-domain analysis allows us to find the steady-state value of a signal directly from its Z-transform. The theorem states that if the system is stable, the final value of the time-domain signal <span class="math inline">\(y_t\)</span> as <span class="math inline">\(t \to \infty\)</span> is found by evaluating the limit as <span class="math inline">\(z \to 1\)</span>. This point on the Z-plane corresponds to the DC or steady-state component of the signal, as illustrated in <a href="#fig-zplane" class="quarto-xref">Figure 1</a>.</p>
+<p>The Final Value Theorem (FVT) in <span class="math inline">\(\mathcal{Z}\)</span>-domain analysis allows us to find the steady-state value of a signal directly from its <span class="math inline">\(\mathcal{Z}\)</span>-transform. The theorem states that if the system is stable, the final value of the time-domain signal <span class="math inline">\(y_t\)</span> as <span class="math inline">\(t \to \infty\)</span> is found by evaluating the limit as <span class="math inline">\(z \to 1\)</span>. This point on the <span class="math inline">\(\mathcal{Z}\)</span>-plane corresponds to the DC or steady-state component of the signal, as illustrated in <a href="#fig-zplane" class="quarto-xref">Figure 1</a>.</p>
 <div id="fig-zplane" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-zplane-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img role="img" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgd2lkdGg9IjQwMCIKICAgaGVpZ2h0PSI0MDAiCiAgIHZpZXdCb3g9Ii0yIC0yIDQgNCIKICAgdmVyc2lvbj0iMS4xIgogICBpZD0ic3ZnNSIKICAgc29kaXBvZGk6ZG9jbmFtZT0iel9wbGFuZS5zdmciCiAgIGlua3NjYXBlOnZlcnNpb249IjEuNC4yIChmNDMyN2Y0LCAyMDI1LTA1LTEzKSIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcwogICAgIGlkPSJkZWZzNSIgLz4KICA8c29kaXBvZGk6bmFtZWR2aWV3CiAgICAgaWQ9Im5hbWVkdmlldzUiCiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIjMDAwMDAwIgogICAgIGJvcmRlcm9wYWNpdHk9IjAuMjUiCiAgICAgaW5rc2NhcGU6c2hvd3BhZ2VzaGFkb3c9IjIiCiAgICAgaW5rc2NhcGU6cGFnZW9wYWNpdHk9IjAuMCIKICAgICBpbmtzY2FwZTpwYWdlY2hlY2tlcmJvYXJkPSIwIgogICAgIGlua3NjYXBlOmRlc2tjb2xvcj0iI2QxZDFkMSIKICAgICBzaG93Z3VpZGVzPSJ0cnVlIgogICAgIGlua3NjYXBlOnpvb209IjEuNTkwMjk0OCIKICAgICBpbmtzY2FwZTpjeD0iMjg5LjU2ODk2IgogICAgIGlua3NjYXBlOmN5PSIxNTUuMDAyNzEiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxOTIwIgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9Ijk3NCIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iLTExIgogICAgIGlua3NjYXBlOndpbmRvdy15PSItMTEiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMSIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJzdmc1Ij4KICAgIDxzb2RpcG9kaTpndWlkZQogICAgICAgcG9zaXRpb249IjIsMy44IgogICAgICAgb3JpZW50YXRpb249IjAsLTEiCiAgICAgICBpZD0iZ3VpZGU1IgogICAgICAgaW5rc2NhcGU6bG9ja2VkPSJmYWxzZSIgLz4KICA8L3NvZGlwb2RpOm5hbWVkdmlldz4KICA8c3R5bGUKICAgICBpZD0ic3R5bGUxIj4KICAgIC5heGlzIHsKICAgICAgc3Ryb2tlOiAjODg4OwogICAgICBzdHJva2Utd2lkdGg6IDAuMDI7CiAgICAgIHN0cm9rZS1saW5lY2FwOiByb3VuZDsKICAgIH0KICAgIC5heGlzLWFycm93IHsKICAgICAgZmlsbDogIzg4ODsKICAgIH0KICAgIC51bml0LWNpcmNsZSB7CiAgICAgIHN0cm9rZTogIzY2ZDllZjsKICAgICAgc3Ryb2tlLXdpZHRoOiAwLjA0OwogICAgICBmaWxsOiBub25lOwogICAgfQogICAgLnBvaW50IHsKICAgICAgZmlsbDogI2ZkOTcxZjsKICAgIH0KICAgIC5sYWJlbCB7CiAgICAgIGZvbnQtZmFtaWx5OiBzYW5zLXNlcmlmOwogICAgICBmb250LXNpemU6IDAuMnB4OwogICAgICBmaWxsOiAjY2NjOwogICAgICB0ZXh0LWFuY2hvcjogbWlkZGxlOwogICAgfQogICAgLnBvaW50LWxhYmVsIHsKICAgICAgZm9udC1zaXplOiAwLjE4cHg7CiAgICAgIGZpbGw6ICNmZDk3MWY7CiAgICAgIHRleHQtYW5jaG9yOiBzdGFydDsKICAgIH0KICA8L3N0eWxlPgogIDwhLS0gQXhlcyAtLT4KICA8bGluZQogICAgIGNsYXNzPSJheGlzIgogICAgIHgxPSItMS44IgogICAgIHkxPSIwIgogICAgIHgyPSIxLjgiCiAgICAgeTI9IjAiCiAgICAgaWQ9ImxpbmUxIiAvPgogIDxsaW5lCiAgICAgY2xhc3M9ImF4aXMiCiAgICAgeDE9IjAiCiAgICAgeTE9Ii0xLjgiCiAgICAgeDI9IjAiCiAgICAgeTI9IjEuOCIKICAgICBpZD0ibGluZTIiIC8+CiAgPHBvbHlnb24KICAgICBjbGFzcz0iYXhpcy1hcnJvdyIKICAgICBwb2ludHM9IjEuNywwLjA1IDEuOCwwIDEuNywtMC4wNSAiCiAgICAgaWQ9InBvbHlnb24yIgogICAgIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAuMDQpIiAvPgogIDxwb2x5Z29uCiAgICAgY2xhc3M9ImF4aXMtYXJyb3ciCiAgICAgcG9pbnRzPSItMC4wNSwxLjcgMC4wNSwxLjcgMCwxLjggIgogICAgIGlkPSJwb2x5Z29uMyIKICAgICB0cmFuc2Zvcm09InJvdGF0ZSgxODAsMCwtMC4wMjU3NzgyOCkiIC8+CiAgPCEtLSBBeGlzIExhYmVscyAtLT4KICA8dGV4dAogICAgIGNsYXNzPSJsYWJlbCIKICAgICB4PSIxLjYiCiAgICAgeT0iMC4yIgogICAgIGlkPSJ0ZXh0MyI+UmUoeik8L3RleHQ+CiAgPHRleHQKICAgICBjbGFzcz0ibGFiZWwiCiAgICAgeD0iMC4zNzkzMzU5NyIKICAgICB5PSItMS43MTk2MDMzIgogICAgIGlkPSJ0ZXh0NCI+SW0oeik8L3RleHQ+CiAgPCEtLSBVbml0IENpcmNsZSAtLT4KICA8Y2lyY2xlCiAgICAgY2xhc3M9InVuaXQtY2lyY2xlIgogICAgIGN4PSIwIgogICAgIGN5PSIwIgogICAgIHI9IjEiCiAgICAgaWQ9ImNpcmNsZTQiIC8+CiAgPCEtLSBQb2ludCBhdCB6PTEgLS0+CiAgPGNpcmNsZQogICAgIGNsYXNzPSJwb2ludCIKICAgICBjeD0iMSIKICAgICBjeT0iMCIKICAgICByPSIwLjA1IgogICAgIGlkPSJjaXJjbGU1IiAvPgogIDx0ZXh0CiAgICAgY2xhc3M9InBvaW50LWxhYmVsIgogICAgIHg9IjEuMSIKICAgICB5PSItMC4xIgogICAgIGlkPSJ0ZXh0NSI+ej0xPC90ZXh0Pgo8L3N2Zz4K" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-zplane-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure 1: The Z-Plane, showing the unit circle. The point <span class="math inline">\(z=1\)</span> is highlighted, as this is the point evaluated when applying the Final Value Theorem to find the long-run steady-state gain.
+Figure 1: The <span class="math inline">\(\mathcal{Z}\)</span>-Plane, showing the unit circle. The point <span class="math inline">\(z=1\)</span> is highlighted, as this is the point evaluated when applying the Final Value Theorem to find the long-run steady-state gain.
 </figcaption>
 </figure>
 </div>
-<p>The Final Value Theorem is formally stated in <a href="#eq-fvt" class="quarto-xref">Equation 5</a>. It allows us to find the steady-state value of a time-domain signal directly from its Z-transform.</p>
+<p>The Final Value Theorem is formally stated in <a href="#eq-fvt" class="quarto-xref">Equation 5</a>. It allows us to find the steady-state value of a time-domain signal directly from its <span class="math inline">\(\mathcal{Z}\)</span>-transform.</p>
 <p><span id="eq-fvt"><span class="math display">\[
 \lim_{t \to \infty} y_t = \lim_{z \to 1} (1 - z^{-1}) Y(z)
 \tag{5}\]</span></span></p>
-<p>To find the long-run multiplier for the exogenous variable <span class="math inline">\(X\)</span>, we analyze the system’s response to a unit step input, <span class="math inline">\(X_t = u(t)\)</span>, where <span class="math inline">\(u(t) = 1\)</span> for <span class="math inline">\(t \ge 0\)</span>. The Z-transform of a unit step is <span class="math inline">\(X(z) = \frac{1}{1-z^{-1}}\)</span>. The component of the output that is driven by <span class="math inline">\(X\)</span> is <span class="math inline">\(Y_x(z) = H(z)X(z)\)</span>. Applying the FVT to this component gives the long-run effect:</p>
+<p>To find the long-run multiplier for the exogenous variable <span class="math inline">\(X\)</span>, we analyze the system’s response to a unit step input, <span class="math inline">\(X_t = u(t)\)</span>, where <span class="math inline">\(u(t) = 1\)</span> for <span class="math inline">\(t \ge 0\)</span>. The <span class="math inline">\(\mathcal{Z}\)</span>-transform of a unit step is <span class="math inline">\(X(z) = \frac{1}{1-z^{-1}}\)</span>. The component of the output that is driven by <span class="math inline">\(X\)</span> is <span class="math inline">\(Y_x(z) = H(z)X(z)\)</span>. Applying the FVT to this component gives the long-run effect:</p>
 <p><span class="math display">\[
 \begin{align}
 \text{Long-Run Multiplier} &amp;= \lim_{z \to 1} (1 - z^{-1}) Y_x(z) \\
@@ -2444,7 +2444,7 @@ LRM_t =&amp; +2.62 \\
      &amp; +0.13 \cdot IDE_t -0.33 \cdot IDE_{t-1} + 1.40 \cdot IDE_{t-2}
 \end{align}
 \tag{8}\]</span></span></p>
-<p>Transforming to the Z-domain and setting <span class="math inline">\(z=1\)</span> (which is equivalent to summing the coefficients for each variable), we can find the long-run multipliers.</p>
+<p>Transforming to the <span class="math inline">\(\mathcal{Z}\)</span>-domain and setting <span class="math inline">\(z=1\)</span> (which is equivalent to summing the coefficients for each variable), we can find the long-run multipliers.</p>
 <p><strong>Denominator (from LRM lags):</strong></p>
 <p><span class="math display">\[
 1 - \sum \phi_i = 1 - (0.3192 + 0.5326 - 0.2687) = 1 - 0.5831 = 0.4169

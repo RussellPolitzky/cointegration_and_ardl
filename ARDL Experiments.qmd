@@ -69,7 +69,7 @@ LRM &=       6.29 + 0.996 \cdot LRY - 4.54 \cdot IBO + 2.89 \cdot IDE \\
 \end{align}
 $$ {#eq-coint_vector}
 
-Given the ARDL model, can we find the cointegration vector using a simple Z-transform technique?
+Given the ARDL model, can we find the cointegration vector using a simple $\mathcal{Z}$-transform technique?
 
 # Cointegration Vector from the ARDL Equation using Z-Domain Techniques
 
@@ -77,15 +77,16 @@ Given the ARDL model, can we find the cointegration vector using a simple Z-tran
 
 ![The Z-Plane, showing the unit circle and the point Z=1, which corresponds to the steady-state or DC component of a signal.](z_plane.svg)
 
-Applying the $\mathcal{Z}$-transform to @eq-ardl_model, we obtain @eq-z_transformed. To find the long-run (steady-state) relationship, we must evaluate the system's response at zero frequency, which corresponds to setting $Z=1$.
+Applying the $\mathcal{Z}$-transform to @eq-ardl_model, we obtain @eq-z_transformed. To find the long-run (steady-state) relationship, we must evaluate the system's response at zero frequency, which corresponds to setting $\mathcal{Z}=1$.
 
-$$
+$
 \begin{align}
-LRM\left(Z\right)=&+2.62\\&+0.32\cdot LRM\left(Z\right)\cdot Z^{-1}+0.53\cdot LRM\left(Z\right)\cdot Z^{-2}-0.27\cdot LRM\left(Z\right)\cdot Z^{-3}\\&+0.67\cdot LRY\left(Z\right)-0.26\cdot LRY\left(Z\right)\cdot Z^{-1}\\&-1.08\cdot IBO\left(Z\right)-0.11\cdot IBO\left(Z\right)\cdot Z^{-1}+0.29\cdot IBO\left(Z\right)\cdot Z^{-2}\\&+0.13\cdot IDE\left(Z\right)-0.33\cdot IDE\left(Z\right)\cdot Z^{-1}+1.40\cdot IDE\left(Z\right)\cdot Z^{-2}
+LRM\left(\mathcal{Z}\right)=&+2.62\\&+0.32\cdot LRM\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-1}+0.53\cdot LRM\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-2}-0.27\cdot LRM\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-3}\\&+0.67\cdot LRY\left(\mathcal{Z}\right)-0.26\cdot LRY\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-1}\\&-1.08\cdot IBO\left(\mathcal{Z}\right)-0.11\cdot IBO\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-1}+0.29\cdot IBO\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-2}\\&+0.13\cdot IDE\left(\mathcal{Z}\right)-0.33\cdot IDE\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-1}+1.40\cdot IDE\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-2}
 \end{align}
-$$ {#eq-z_transformed}
+$ {#eq-z_transformed}
 
-Setting $Z=1$ in @eq-z_transformed allows us to solve for the long-run multipliers because $Z=1$ represents the DC or steady-state component of the signal. The formula for the long-run multipliers is given in @eq-longrun-multiplier:
+Setting $\mathcal{Z}=1$ in @eq-z_transformed allows us to solve for the long-run multipliers because $\mathcal{Z}=1$ represents the DC or steady-state component of the signal. The formula for the long-run multipliers is given in @eq-longrun-multiplier:
+
 
 $$
 LRM(1) = \frac{\text{Intercept} + \sum\gamma_j + \sum\delta_k + \sum\zeta_l}{1 - \sum\beta_i}
@@ -99,7 +100,7 @@ $$
 LRM = 6.29 + 0.996 \cdot LRY - 4.54 \cdot IBO + 2.89 \cdot IDE
 $$ {#eq-zdomain-coint}
 
-As shown, this result from the Z-transform method is identical to the cointegration vector produced by the `multipliers()` function in @eq-coint_vector. This confirms that setting $Z=1$ is the correct approach for deriving the long-run equilibrium relationship from the ARDL model's difference equation.
+As shown, this result from the $\mathcal{Z}$-transform method is identical to the cointegration vector produced by the `multipliers()` function in @eq-coint_vector. This confirms that setting $\mathcal{Z}=1$ is the correct approach for deriving the long-run equilibrium relationship from the ARDL model's difference equation.
 
 # The Cointegration Vector From The Time Domain
 

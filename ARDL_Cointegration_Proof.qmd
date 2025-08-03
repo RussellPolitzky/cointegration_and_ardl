@@ -1,6 +1,6 @@
 ---
 title: "Long-Run Equilibrium in ARDL Models"
-subtitle: "A Formal Proof using the Z-Transform and the Final Value Theorem"
+subtitle: "A Formal Proof using the $\\mathcal{Z}$-Transform and the Final Value Theorem"
 author:
   - name: Russell Politzky
   - name: Gemini
@@ -13,9 +13,9 @@ embed-resources: true
 
 # Introduction
 
-This document provides a formal proof for deriving the long-run multipliers from an Autoregressive Distributed Lag (ARDL) model. These multipliers form the cointegration vector, which represents the long-run equilibrium relationship between the variables. The proof will use Z-transform techniques, specifically the Final Value Theorem.
+This document provides a formal proof for deriving the long-run multipliers from an Autoregressive Distributed Lag (ARDL) model. These multipliers form the cointegration vector, which represents the long-run equilibrium relationship between the variables. The proof will use $\mathcal{Z}$-transform techniques, specifically the Final Value Theorem.
 
-A general ARDL(p, q) model can be expressed as a difference equation:
+A general $ARDL(p, q)$ model can be expressed as the difference equation shown in @eq-ardl-general.
 
 $$
 Y_t = \alpha + \sum_{i=1}^{p} \phi_i Y_{t-i} + \sum_{j=0}^{q} \beta_j X_{t-j} + \epsilon_t
@@ -38,9 +38,9 @@ q & \text{The number of lags for the exogenous variable.} \\
 \end{array}
 $$
 
-# Z-Transform of the ARDL Equation
+# $\mathcal{Z}$-Transform of the ARDL Equation
 
-To analyze the long-run behavior of the system, we first apply the Z-transform to the ARDL equation (@eq-ardl-general). The Z-transform converts the difference equation into an algebraic equation in the Z-domain. For this analysis, the constant intercept, $\alpha$, is treated as a causal step function input, $\alpha \cdot u(t)$, which is constant for $t \ge 0$. Its Z-transform is $\frac{\alpha}{1-z^{-1}}$. Using this and the time-shifting property of the Z-transform, which states that $\mathcal{Z}\{f_{t-k}\} = z^{-k}F(z)$, we get:
+To analyze the long-run behavior of the system, we first apply the $\mathcal{Z}$-transform to the ARDL equation (@eq-ardl-general). The $\mathcal{Z}$-transform converts the difference equation into an algebraic equation in the $\mathcal{Z}$-domain. For this analysis, the constant intercept, $\alpha$, is treated as a causal step function input, $\alpha \cdot u(t)$, which is constant for $t \ge 0$. Its $\mathcal{Z}$-transform is $\frac{\alpha}{1-z^{-1}}$. Using this and the time-shifting property of the $\mathcal{Z}$-transform, which states that $\mathcal{Z}\{f_{t-k}\} = z^{-k}F(z)$, we get:
 
 $$
 Y(z) = \frac{\alpha}{1-z^{-1}} + Y(z)\sum_{i=1}^{p} \phi_i z^{-i} + X(z)\sum_{j=0}^{q} \beta_j z^{-j} + E(z)
@@ -51,9 +51,9 @@ $$
 \hline
 \textbf{Term} & \textbf{Description} \\
 \hline
-Y(z) & \text{The Z-transform of the endogenous variable } Y_t. \\
-X(z) & \text{The Z-transform of the exogenous variable } X_t. \\
-E(z) & \text{The Z-transform of the error term } \epsilon_t. \\
+Y(z)   & \text{The } \mathcal{Z}\text{-transform of the endogenous variable } Y_t. \\
+X(z)   & \text{The } \mathcal{Z}\text{-transform of the exogenous variable } X_t. \\
+E(z)   & \text{The } \mathcal{Z}\text{-transform of the error term } \epsilon_t. \\
 z^{-k} & \text{Represents a time delay of } k \text{ periods.} \\
 \hline
 \end{array}
@@ -85,17 +85,17 @@ $$ {#eq-full-response}
 
 # The Final Value Theorem and Long-Run Multipliers
 
-The Final Value Theorem (FVT) in Z-domain analysis allows us to find the steady-state value of a signal directly from its Z-transform. The theorem states that if the system is stable, the final value of the time-domain signal $y_t$ as $t \to \infty$ is found by evaluating the limit as $z \to 1$. This point on the Z-plane corresponds to the DC or steady-state component of the signal, as illustrated in @fig-zplane.
+The Final Value Theorem (FVT) in $\mathcal{Z}$-domain analysis allows us to find the steady-state value of a signal directly from its $\mathcal{Z}$-transform. The theorem states that if the system is stable, the final value of the time-domain signal $y_t$ as $t \to \infty$ is found by evaluating the limit as $z \to 1$. This point on the $\mathcal{Z}$-plane corresponds to the DC or steady-state component of the signal, as illustrated in @fig-zplane.
 
-![The Z-Plane, showing the unit circle. The point $z=1$ is highlighted, as this is the point evaluated when applying the Final Value Theorem to find the long-run steady-state gain.](z_plane.svg){#fig-zplane}
+![The $\mathcal{Z}$-Plane, showing the unit circle. The point $z=1$ is highlighted, as this is the point evaluated when applying the Final Value Theorem to find the long-run steady-state gain.](z_plane.svg){#fig-zplane}
 
-The Final Value Theorem is formally stated in @eq-fvt. It allows us to find the steady-state value of a time-domain signal directly from its Z-transform.
+The Final Value Theorem is formally stated in @eq-fvt. It allows us to find the steady-state value of a time-domain signal directly from its $\mathcal{Z}$-transform.
 
 $$
 \lim_{t \to \infty} y_t = \lim_{z \to 1} (1 - z^{-1}) Y(z)
 $$ {#eq-fvt}
 
-To find the long-run multiplier for the exogenous variable $X$, we analyze the system's response to a unit step input, $X_t = u(t)$, where $u(t) = 1$ for $t \ge 0$. The Z-transform of a unit step is $X(z) = \frac{1}{1-z^{-1}}$. The component of the output that is driven by $X$ is $Y_x(z) = H(z)X(z)$. Applying the FVT to this component gives the long-run effect:
+To find the long-run multiplier for the exogenous variable $X$, we analyze the system's response to a unit step input, $X_t = u(t)$, where $u(t) = 1$ for $t \ge 0$. The $\mathcal{Z}$-transform of a unit step is $X(z) = \frac{1}{1-z^{-1}}$. The component of the output that is driven by $X$ is $Y_x(z) = H(z)X(z)$. Applying the FVT to this component gives the long-run effect:
 
 $$
 \begin{align}
@@ -146,7 +146,7 @@ LRM_t =& +2.62 \\
 \end{align}
 $$ {#eq-ardl-example}
 
-Transforming to the Z-domain and setting $z=1$ (which is equivalent to summing the coefficients for each variable), we can find the long-run multipliers.
+Transforming to the $\mathcal{Z}$-domain and setting $z=1$ (which is equivalent to summing the coefficients for each variable), we can find the long-run multipliers.
 
 **Denominator (from LRM lags):**
 
@@ -158,11 +158,9 @@ $$
 
 $$
 \sum \beta_{LRY} = 0.6728 - 0.2574 = 0.4154
-$$
-$$
+$$ $$
 \sum \beta_{IBO} = -1.0785 - 0.1062 + 0.2877 - 0.9947 = -1.8917
-$$
-$$
+$$ $$
 \sum \beta_{IDE} = 0.1255 - 0.3280 + 1.4079 = 1.2054
 $$
 
@@ -170,14 +168,11 @@ Now, we calculate the long-run multipliers using the formula from @eq-long-run-m
 
 $$
 \text{Intercept Multiplier} = \frac{2.62}{0.4169} = 6.28
-$$
-$$
+$$ $$
 \text{LRY Multiplier} = \frac{0.4154}{0.4169} = 0.996
-$$
-$$
+$$ $$
 \text{IBO Multiplier} = \frac{-1.8917}{0.4169} = -4.54
-$$
-$$
+$$ $$
 \text{IDE Multiplier} = \frac{1.2054}{0.4169} = 2.89
 $$
 
