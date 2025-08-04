@@ -8,8 +8,7 @@ theme: darkly
 
 We will build an ARDL model as follows:
 
-```{
-r}
+```{r}
 #| label: setup
 
 suppressPackageStartupMessages({
@@ -29,15 +28,14 @@ $$
 LRM =& +2.62 \\
      & +0.32 \cdot LRM_{t-1} + 0.53 \cdot LRM_{t-2} -0.27 \cdot LRM_{t-3} \\
      & +0.67 \cdot LRY -0.26 \cdot LRY_{t-1} \\
-     & -1.08 \cdot IBO -0.11 \cdot IBO_{t-1} + 0.29 \cdot IBO_{t-2} \\
+     & -1.08 \cdot IBO -0.11 \cdot IBO_{t-1} + 0.29 \cdot IBO_{t-2} -0.99 \cdot IBO_{t-3} \\
      & +0.13 \cdot IDE -0.33 \cdot IDE_{t-1} + 1.40 \cdot IDE_{t-2}
 \end{align}
 $$ {#eq-ardl_model}
 
 To test for cointegration, we use the bounds F-test on the ARDL model as follows:
 
-```{
-r}
+```{r}
 #| label: bounds-test
  
 bounds_test_results <-
@@ -54,8 +52,7 @@ For the null hypothesis of no cointegration to be accepted, the F-statistic must
 
 Given this result, the cointegration vector is as follows:
 
-```{
-r}
+```{r}
 #| label: coint-vector
 multipliers(ardl_3132)
 ```
@@ -86,6 +83,7 @@ LRM\left(\mathcal{Z}\right)=&+2.62\\&+0.32\cdot LRM\left(\mathcal{Z}\right)\cdot
 $ {#eq-z_transformed}
 
 Setting $\mathcal{Z}=1$ in @eq-z_transformed allows us to solve for the long-run multipliers because $\mathcal{Z}=1$ represents the DC or steady-state component of the signal. The formula for the long-run multipliers is given in @eq-longrun-multiplier:
+
 
 
 $$

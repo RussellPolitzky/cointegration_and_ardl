@@ -2293,6 +2293,10 @@ window.Quarto = {
 };
 </script>
 
+<style type="text/css">p {
+text-align: justify;
+}
+</style>
 </head>
 
 <body class="fullcontent quarto-light">
@@ -2434,7 +2438,7 @@ Figure 1: The <span class="math inline">\(\mathcal{Z}\)</span>-Plane, showing t
 </section>
 <section id="application-to-the-example-ardl-equation" class="level1">
 <h1>Application to the Example ARDL Equation</h1>
-<p>Let’s apply this technique to the <code>ardl_3132</code> model from the <code>ARDL Experiments.qmd</code> file. The model equation is:</p>
+<p>Let’s apply this technique to the <code>ardl_3132</code> model from the <code>ARDL Experiments.qmd</code> file. The model equation, consistent with the <code>order = c(3,1,3,2)</code> parameter, is:</p>
 <p><span id="eq-ardl-example"><span class="math display">\[
 \begin{align}
 LRM_t =&amp; +2.62 \\
@@ -2446,31 +2450,27 @@ LRM_t =&amp; +2.62 \\
 \tag{8}\]</span></span></p>
 <p>Transforming to the <span class="math inline">\(\mathcal{Z}\)</span>-domain and setting <span class="math inline">\(z=1\)</span> (which is equivalent to summing the coefficients for each variable), we can find the long-run multipliers.</p>
 <p><strong>Denominator (from LRM lags):</strong></p>
-<p><span class="math display">\[
+<p><span id="eq-sum-phi"><span class="math display">\[
 1 - \sum \phi_i = 1 - (0.3192 + 0.5326 - 0.2687) = 1 - 0.5831 = 0.4169
-\]</span></p>
+\tag{9}\]</span></span></p>
 <p><strong>Numerators (from exogenous variables):</strong></p>
-<p><span class="math display">\[
+<p><span id="eq-sum-beta-lry"><span class="math display">\[
 \sum \beta_{LRY} = 0.6728 - 0.2574 = 0.4154
-\]</span> <span class="math display">\[
+\tag{10}\]</span></span></p>
+<p><span id="eq-sum-beta-ibo"><span class="math display">\[
 \sum \beta_{IBO} = -1.0785 - 0.1062 + 0.2877 - 0.9947 = -1.8917
-\]</span> <span class="math display">\[
+\tag{11}\]</span></span></p>
+<p><span id="eq-sum-beta-ide"><span class="math display">\[
 \sum \beta_{IDE} = 0.1255 - 0.3280 + 1.4079 = 1.2054
-\]</span></p>
+\tag{12}\]</span></span></p>
 <p>Now, we calculate the long-run multipliers using the formula from <a href="#eq-long-run-multiplier" class="quarto-xref">Equation 6</a>:</p>
-<p><span class="math display">\[
-\text{Intercept Multiplier} = \frac{2.62}{0.4169} = 6.28
-\]</span> <span class="math display">\[
-\text{LRY Multiplier} = \frac{0.4154}{0.4169} = 0.996
-\]</span> <span class="math display">\[
-\text{IBO Multiplier} = \frac{-1.8917}{0.4169} = -4.54
-\]</span> <span class="math display">\[
-\text{IDE Multiplier} = \frac{1.2054}{0.4169} = 2.89
-\]</span></p>
+<p><span id="eq-long-run-multipliers"><span class="math display">\[
+\begin{align} \text{Intercept Multiplier} &amp;= \frac{2.62}{0.4169} = 6.28 \\ \text{LRY Multiplier} &amp;= \frac{0.4154}{0.4169} = 0.996 \\ \text{IBO Multiplier} &amp;= \frac{-1.8917}{0.4169} = -4.54 \\ \text{IDE Multiplier} &amp;= \frac{1.2054}{0.4169} = 2.89 \end{align}
+\tag{13}\]</span></span></p>
 <p>This gives us the cointegrating equation:</p>
 <p><span id="eq-final-coint-eq"><span class="math display">\[
 LRM = 6.28 + 0.996 \cdot LRY - 4.54 \cdot IBO + 2.89 \cdot IDE
-\tag{9}\]</span></span></p>
+\tag{14}\]</span></span></p>
 <p>This result is identical to the one obtained using the <code>multipliers()</code> function in the <code>ARDL</code> package <span class="citation" data-cites="ardl_pkg">[<a href="#ref-ardl_pkg" role="doc-biblioref">1</a>]</span>, confirming that the Z-transform and Final Value Theorem provide the correct theoretical foundation for recovering the cointegration vector.</p>
 </section>
 <section id="references" class="level1 unnumbered">

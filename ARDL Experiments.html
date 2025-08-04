@@ -163,7 +163,7 @@ Coefficients:
 LRM =&amp; +2.62 \\
      &amp; +0.32 \cdot LRM_{t-1} + 0.53 \cdot LRM_{t-2} -0.27 \cdot LRM_{t-3} \\
      &amp; +0.67 \cdot LRY -0.26 \cdot LRY_{t-1} \\
-     &amp; -1.08 \cdot IBO -0.11 \cdot IBO_{t-1} + 0.29 \cdot IBO_{t-2} \\
+     &amp; -1.08 \cdot IBO -0.11 \cdot IBO_{t-1} + 0.29 \cdot IBO_{t-2} -0.99 \cdot IBO_{t-3} \\
      &amp; +0.13 \cdot IDE -0.33 \cdot IDE_{t-1} + 1.40 \cdot IDE_{t-2}
 \end{align}
 \tag{1}\]</span></span></p>
@@ -209,7 +209,7 @@ LRM &amp;=       6.29 + 0.996 \cdot LRY - 4.54 \cdot IBO + 2.89 \cdot IDE \\
   0 &amp;= LRM - 6.29 - 0.996 \cdot LRY + 4.54 \cdot IBO - 2.89 \cdot IDE
 \end{align}
 \tag{2}\]</span></span></p>
-<p>Given the ARDL model, can we find the cointegration vector using a simple Z-transform technique?</p>
+<p>Given the ARDL model, can we find the cointegration vector using a simple <span class="math inline">\(\mathcal{Z}\)</span>-transform technique?</p>
 </section>
 <section id="cointegration-vector-from-the-ardl-equation-using-z-domain-techniques" class="level1">
 <h1>Cointegration Vector from the ARDL Equation using Z-Domain Techniques</h1>
@@ -221,58 +221,20 @@ LRM &amp;=       6.29 + 0.996 \cdot LRY - 4.54 \cdot IBO + 2.89 \cdot IDE \\
 <figcaption>The Z-Plane, showing the unit circle and the point Z=1, which corresponds to the steady-state or DC component of a signal.</figcaption>
 </figure>
 </div>
-<p>Applying the <span class="math inline">\(\mathcal{Z}\)</span>-transform to <a href="#eq-ardl_model" class="quarto-xref">Equation&nbsp;1</a>, we obtain <a href="#eq-z_transformed" class="quarto-xref">Equation&nbsp;3</a>. To find the long-run (steady-state) relationship, we must evaluate the system’s response at zero frequency, which corresponds to setting <span class="math inline">\(Z=1\)</span>.</p>
-<p><span id="eq-z_transformed"><span class="math display">\[
-\begin{align}
-LRM\left(Z\right)=&amp;+2.62\\&amp;+0.32\cdot LRM\left(Z\right)\cdot Z^{-1}+0.53\cdot LRM\left(Z\right)\cdot Z^{-2}-0.27\cdot LRM\left(Z\right)\cdot Z^{-3}\\&amp;+0.67\cdot LRY\left(Z\right)-0.26\cdot LRY\left(Z\right)\cdot Z^{-1}\\&amp;-1.08\cdot IBO\left(Z\right)-0.11\cdot IBO\left(Z\right)\cdot Z^{-1}+0.29\cdot IBO\left(Z\right)\cdot Z^{-2}\\&amp;+0.13\cdot IDE\left(Z\right)-0.33\cdot IDE\left(Z\right)\cdot Z^{-1}+1.40\cdot IDE\left(Z\right)\cdot Z^{-2}
-\end{align}
-\tag{3}\]</span></span></p>
-<p>Setting <span class="math inline">\(Z=1\)</span> in <a href="#eq-z_transformed" class="quarto-xref">Equation&nbsp;3</a> allows us to solve for the long-run multipliers because <span class="math inline">\(Z=1\)</span> represents the DC or steady-state component of the signal. The formula for the long-run multipliers is given in <a href="#eq-longrun-multiplier" class="quarto-xref">Equation&nbsp;4</a>:</p>
+<p>Applying the <span class="math inline">\(\mathcal{Z}\)</span>-transform to <a href="#eq-ardl_model" class="quarto-xref">Equation&nbsp;1</a>, we obtain <strong>?@eq-z_transformed</strong>. To find the long-run (steady-state) relationship, we must evaluate the system’s response at zero frequency, which corresponds to setting <span class="math inline">\(\mathcal{Z}=1\)</span>.</p>
+<p>$ <span class="math display">\[\begin{align}
+LRM\left(\mathcal{Z}\right)=&amp;+2.62\\&amp;+0.32\cdot LRM\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-1}+0.53\cdot LRM\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-2}-0.27\cdot LRM\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-3}\\&amp;+0.67\cdot LRY\left(\mathcal{Z}\right)-0.26\cdot LRY\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-1}\\&amp;-1.08\cdot IBO\left(\mathcal{Z}\right)-0.11\cdot IBO\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-1}+0.29\cdot IBO\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-2}\\&amp;+0.13\cdot IDE\left(\mathcal{Z}\right)-0.33\cdot IDE\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-1}+1.40\cdot IDE\left(\mathcal{Z}\right)\cdot \mathcal{Z}^{-2}
+\end{align}\]</span> $ {#eq-z_transformed}</p>
+<p>Setting <span class="math inline">\(\mathcal{Z}=1\)</span> in <strong>?@eq-z_transformed</strong> allows us to solve for the long-run multipliers because <span class="math inline">\(\mathcal{Z}=1\)</span> represents the DC or steady-state component of the signal. The formula for the long-run multipliers is given in <a href="#eq-longrun-multiplier" class="quarto-xref">Equation&nbsp;3</a>:</p>
 <p><span id="eq-longrun-multiplier"><span class="math display">\[
 LRM(1) = \frac{\text{Intercept} + \sum\gamma_j + \sum\delta_k + \sum\zeta_l}{1 - \sum\beta_i}
-\tag{4}\]</span></span></p>
+\tag{3}\]</span></span></p>
 <p>where <span class="math inline">\(\beta_i\)</span> are the coefficients of the lagged <span class="math inline">\(LRM\)</span>, and <span class="math inline">\(\gamma_j, \delta_k, \zeta_l\)</span> are the coefficients of the exogenous variables and their lags.</p>
-<p>When we sum the full-precision coefficients from the <code>ardl_3132</code> model object and solve, we get the long-run equation shown in <a href="#eq-zdomain-coint" class="quarto-xref">Equation&nbsp;5</a>:</p>
+<p>When we sum the full-precision coefficients from the <code>ardl_3132</code> model object and solve, we get the long-run equation shown in <a href="#eq-zdomain-coint" class="quarto-xref">Equation&nbsp;4</a>:</p>
 <p><span id="eq-zdomain-coint"><span class="math display">\[
 LRM = 6.29 + 0.996 \cdot LRY - 4.54 \cdot IBO + 2.89 \cdot IDE
-\tag{5}\]</span></span></p>
-<p>As shown, this result from the Z-transform method is identical to the cointegration vector produced by the <code>multipliers()</code> function in <a href="#eq-coint_vector" class="quarto-xref">Equation&nbsp;2</a>. This confirms that setting <span class="math inline">\(Z=1\)</span> is the correct approach for deriving the long-run equilibrium relationship from the ARDL model’s difference equation.</p>
-</section>
-</section>
-<section id="formal-derivation-of-the-long-run-multiplier" class="level1">
-<h1>Formal Derivation of the Long-Run Multiplier</h1>
-<p>We can formally derive the long-run multiplier for an exogenous variable using the Final Value Theorem from control theory and signal processing. This theorem provides a direct link between the Z-domain representation of a system and its steady-state value in the time domain.</p>
-<section id="the-ardl-model" class="level3">
-<h3 class="anchored" data-anchor-id="the-ardl-model">1. The ARDL Model</h3>
-<p>Let’s consider a general ARDL(<span class="math inline">\(p, q\)</span>) model with an intercept <span class="math inline">\(c\)</span>, one endogenous variable <span class="math inline">\(y_t\)</span>, and one exogenous variable <span class="math inline">\(x_t\)</span>:</p>
-<p>$ y_t = c + ^{p}* i y<em>{t-i} + ^{q} j x</em>{t-j} $ {#eq-ardl-general}</p>
-</section>
-<section id="the-z-transform" class="level3">
-<h3 class="anchored" data-anchor-id="the-z-transform">2. The Z-Transform</h3>
-<p>Applying the <span class="math inline">\(\mathcal{Z}\)</span>-transform to <strong>?@eq-ardl-general</strong>, and using the time-shifting property <span class="math inline">\(Z\{f_{t-k}\} = z^{-k}F(z)\)</span>, we get:</p>
-<p>$ Y(z) = Z{c u_t} + _{i=1}^{p} i z^{-i}Y(z) +* ^{q} _j z^{-j}X(z) $</p>
-<p>where <span class="math inline">\(u_t\)</span> is the unit step function, for which <span class="math inline">\(Z\{u_t\} = \frac{z}{z-1}\)</span>. Rearranging to solve for <span class="math inline">\(Y(z)\)</span>:</p>
-<p>$ Y(z) (1 - _{i=1}^{p} i z^{-i}*) = + X(z) (^{q} _j z^{-j}) $</p>
-<p>This gives the transfer function of the system:</p>
-<p>$ Y(z) = $</p>
-</section>
-<section id="the-final-value-theorem-and-step-excitation" class="level3">
-<h3 class="anchored" data-anchor-id="the-final-value-theorem-and-step-excitation">3. The Final Value Theorem and Step Excitation</h3>
-<p>The Final Value Theorem (FVT) states that the steady-state value of a time-domain signal <span class="math inline">\(y_t\)</span> can be found from its Z-transform <span class="math inline">\(Y(z)\)</span>:</p>
-<p>$ y_{ss} = y_t = (z-1)Y(z) $</p>
-<p>The long-run multiplier is the total change in the steady-state of <span class="math inline">\(y\)</span> resulting from a permanent one-unit change in <span class="math inline">\(x\)</span>. This permanent change is a <strong>unit step excitation</strong>, where <span class="math inline">\(x_t = u_t\)</span>. The Z-transform of the unit step is <span class="math inline">\(X(z) = \frac{z}{z-1}\)</span>.</p>
-</section>
-<section id="the-proof" class="level3">
-<h3 class="anchored" data-anchor-id="the-proof">4. The Proof</h3>
-<p>To find the long-run multiplier, we set the intercept <span class="math inline">\(c=0\)</span> (as it only affects the baseline level of <span class="math inline">\(y_{ss}\)</span>, not the change due to <span class="math inline">\(x\)</span>) and substitute our step input <span class="math inline">\(X(z)\)</span> into the equation for <span class="math inline">\(Y(z)\)</span>:</p>
-<p>$ Y(z) = $</p>
-<p>Now, we apply the Final Value Theorem to find the new steady-state value of <span class="math inline">\(y\)</span>:</p>
-<p>$ y_{ss} = _{z } (z-1) $</p>
-<p>The <span class="math inline">\((z-1)\)</span> term from the FVT cancels with the <span class="math inline">\((z-1)\)</span> from the step input’s transform:</p>
-<p>$ y_{ss} = _{z } $</p>
-<p>Evaluating the limit by substituting <span class="math inline">\(z=1\)</span>:</p>
-<p>$ y_{ss} = = $</p>
-<p>This final result, <span class="math inline">\(y_{ss}\)</span>, is the total change in <span class="math inline">\(y\)</span> for a one-unit step in <span class="math inline">\(x\)</span>. It is the <strong>long-run multiplier</strong>. This formally proves that the multiplier is the sum of the coefficients of the exogenous variable divided by one minus the sum of the coefficients of the endogenous variable. This is the same result obtained by setting <span class="math inline">\(z=1\)</span> in the transfer function, as shown previously.</p>
+\tag{4}\]</span></span></p>
+<p>As shown, this result from the <span class="math inline">\(\mathcal{Z}\)</span>-transform method is identical to the cointegration vector produced by the <code>multipliers()</code> function in <a href="#eq-coint_vector" class="quarto-xref">Equation&nbsp;2</a>. This confirms that setting <span class="math inline">\(\mathcal{Z}=1\)</span> is the correct approach for deriving the long-run equilibrium relationship from the ARDL model’s difference equation.</p>
 </section>
 </section>
 <section id="the-cointegration-vector-from-the-time-domain" class="level1">

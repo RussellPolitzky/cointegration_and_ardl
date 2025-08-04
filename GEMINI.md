@@ -33,7 +33,7 @@ The session focused on enhancing a project related to Autoregressive Distributed
     a = b + c 
     $$ {#eq-example}
 
-    *   This convention has been saved as a preference for all future work on this project.
+    *   This convention has been saved as a preference for all future work on this project.  Please ensure that this format is used for all equations.
 
 5. When formatting equations, please use the following style:
 

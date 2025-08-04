@@ -4,7 +4,9 @@ subtitle: "A Formal Proof using the $\\mathcal{Z}$-Transform and the Final Value
 author:
   - name: Russell Politzky
   - name: Gemini
-format: html
+format:
+  html:
+    css: styles.css
 theme: darkly
 bibliography: references.bib
 csl: ieee.csl
@@ -134,7 +136,7 @@ The cointegration vector is formed by these long-run multipliers.
 
 # Application to the Example ARDL Equation
 
-Let's apply this technique to the `ardl_3132` model from the `ARDL Experiments.qmd` file. The model equation is:
+Let's apply this technique to the `ardl_3132` model from the `ARDL Experiments.qmd` file. The model equation, consistent with the `order = c(3,1,3,2)` parameter, is:
 
 $$
 \begin{align}
@@ -152,33 +154,31 @@ Transforming to the $\mathcal{Z}$-domain and setting $z=1$ (which is equivalent 
 
 $$
 1 - \sum \phi_i = 1 - (0.3192 + 0.5326 - 0.2687) = 1 - 0.5831 = 0.4169
-$$
+$$ {#eq-sum-phi}
 
 **Numerators (from exogenous variables):**
 
-$$
-\sum \beta_{LRY} = 0.6728 - 0.2574 = 0.4154
-$$ $$
-\sum \beta_{IBO} = -1.0785 - 0.1062 + 0.2877 - 0.9947 = -1.8917
-$$ $$
-\sum \beta_{IDE} = 0.1255 - 0.3280 + 1.4079 = 1.2054
-$$
+$$ 
+\sum \beta_{LRY} = 0.6728 - 0.2574 = 0.4154 
+$$ {#eq-sum-beta-lry}
+
+$$ 
+\sum \beta_{IBO} = -1.0785 - 0.1062 + 0.2877 - 0.9947 = -1.8917 
+$$ {#eq-sum-beta-ibo}
+
+$$ 
+\sum \beta_{IDE} = 0.1255 - 0.3280 + 1.4079 = 1.2054 
+$$ {#eq-sum-beta-ide}
 
 Now, we calculate the long-run multipliers using the formula from @eq-long-run-multiplier:
 
-$$
-\text{Intercept Multiplier} = \frac{2.62}{0.4169} = 6.28
-$$ $$
-\text{LRY Multiplier} = \frac{0.4154}{0.4169} = 0.996
-$$ $$
-\text{IBO Multiplier} = \frac{-1.8917}{0.4169} = -4.54
-$$ $$
-\text{IDE Multiplier} = \frac{1.2054}{0.4169} = 2.89
-$$
+$$ 
+\begin{align} \text{Intercept Multiplier} &= \frac{2.62}{0.4169} = 6.28 \\ \text{LRY Multiplier} &= \frac{0.4154}{0.4169} = 0.996 \\ \text{IBO Multiplier} &= \frac{-1.8917}{0.4169} = -4.54 \\ \text{IDE Multiplier} &= \frac{1.2054}{0.4169} = 2.89 \end{align} 
+$$ {#eq-long-run-multipliers}
 
 This gives us the cointegrating equation:
 
-$$
+$$ 
 LRM = 6.28 + 0.996 \cdot LRY - 4.54 \cdot IBO + 2.89 \cdot IDE
 $$ {#eq-final-coint-eq}
 
